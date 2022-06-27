@@ -1,0 +1,9 @@
+{
+  "name": "piglesiastecnologia/php-assignment",
+  "description": "Bladeinsight assignment to demonstrate php mvc structure",
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  }
+}
