@@ -45,23 +45,34 @@ class Turbine
     }
 
     // CRUD OPERATIONS
+
+    /**
+     * @param array $data
+     * @return false|string|void
+     */
     public function create(array $data) {
-        echo "na model :: <pre>";
-        print_r($data);
-        echo "</pre>";
-        die();
+        $data['created'] = date('d-m-y h:i:s');
+        $data['modified'] = date('d-m-y h:i:s');
+
 
         try {
             $conn = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER , DB_PASS);
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $sql = "INSERT INTO turbines (slug, manufacture, dimension_positive, dimension_negative)
-                    VALUES ('John', 'Doe', 'john@example.com')";
+            $sql = "INSERT INTO turbines (slug, manufacture, dimension_positive, dimension_negative, created, modified)
+                    VALUES ('".$data['slug']."', 
+                            '".$data['manufacture']."', 
+                            '".$data['dimension_positive']."', 
+                            '".$data['dimension_negative']."',
+                            '".$data['created']."',
+                            '".$data['modified']."')";
 
             // use exec() because no results are returned
             $conn->exec($sql);
-            echo "New record created successfully";
+
+            return $conn->lastInsertId();
+
         } catch(PDOException $e) {
             echo $sql . "<br>" . $e->getMessage();
         }
@@ -71,11 +82,6 @@ class Turbine
 
     public function read(int $id) {
 
-        $this->id = 1;
-        $this->slug = 'Amaral1-1';
-        $this->manufacture = 'Gamesa';
-        $this->dimension_positive = "39.026628121";
-        $this->dimension_negative =  "-9.048632539";
 
         return $this;
     }
