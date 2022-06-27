@@ -29,68 +29,89 @@ class Turbine
         return $this->manufacture;
     }
 
+    public function setManufacture(string $manufacture)
+    {
+        $this->manufacture = $manufacture;
+    }
+
     public function getDimensionPositive()
     {
         return $this->dimension_positive;
     }
+
+    // SETTERS METHOD
 
     public function getDimensionNegative()
     {
         return $this->dimension_negative;
     }
 
-    // SETTERS METHOD
-    public function setManufacture(string $manufacture) {
-        $this->manufacture = $manufacture;
-    }
-
     // CRUD OPERATIONS
 
     /**
+     * create turbine
      * @param array $data
      * @return false|string|void
      */
-    public function create(array $data) {
+    public function create(array $data)
+    {
+        $conn = $this->conn();
         $data['created'] = date('d-m-y h:i:s');
         $data['modified'] = date('d-m-y h:i:s');
 
+        $sql = "INSERT INTO turbines (slug, manufacture, dimension_positive, dimension_negative, created, modified)
+                    VALUES ('" . $data['slug'] . "', 
+                            '" . $data['manufacture'] . "', 
+                            '" . $data['dimension_positive'] . "', 
+                            '" . $data['dimension_negative'] . "',
+                            '" . $data['created'] . "',
+                            '" . $data['modified'] . "')";
 
+        // use exec() because no results are returned
+        $conn->exec($sql);
+
+        return $conn->lastInsertId();
+
+    }
+
+    public function read(int $id)
+    {
+        $conn = $this->conn();
+        $sql = "SELECT * FROM turbines WHERE id=".$id;
+
+        // use exec() because no results are returned
+        $result = $conn->query($sql);
+
+        return $result->fetch(PDO::FETCH_ASSOC);
+
+    }
+
+    public function update(int $id, array $data)
+    {
+
+    }
+
+    public function delete(int $id)
+    {
+
+    }
+
+
+    /**
+     * conn DB
+     * @return PDO|void
+     */
+    private function conn(){
         try {
-            $conn = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER , DB_PASS);
+            $conn = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $sql = "INSERT INTO turbines (slug, manufacture, dimension_positive, dimension_negative, created, modified)
-                    VALUES ('".$data['slug']."', 
-                            '".$data['manufacture']."', 
-                            '".$data['dimension_positive']."', 
-                            '".$data['dimension_negative']."',
-                            '".$data['created']."',
-                            '".$data['modified']."')";
+            return $conn;
 
-            // use exec() because no results are returned
-            $conn->exec($sql);
-
-            return $conn->lastInsertId();
-
-        } catch(PDOException $e) {
-            echo $sql . "<br>" . $e->getMessage();
+        } catch (PDOException $e) {
+            echo "Erro ao conectar com o MySQL: <br>" . $e->getMessage();
         }
-
-
-    }
-
-    public function read(int $id) {
-
-
-        return $this;
-    }
-
-    public function update(int $id, array $data) {
-
-    }
-
-    public function delete(int $id) {
 
     }
 }

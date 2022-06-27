@@ -8,23 +8,25 @@ class TurbineController {
 
     public function showTurbine(int $id, RouteCollection $routes) {
         $turbine = new Turbine();
-        $turbine->read($id);
+        $result = $turbine->read($id);
 
-        require_once APP_ROOT . '/views/turbines/view.php';
+        $this->json_response($result);
+
     }
 
     public function createTurbine() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $turbine = new Turbine();
-            $record = $turbine->create($_POST);
+            $turbine->create($_POST);
 
             if (!empty($record)) {
 
-                $this->json_response("Create register success :: ".$record);
+                $this->json_response("Create register success :: ".$turbine);
             }
 
         } else {
-            // return method not allowed
+            $this->json_response("Method not allowed", 405);
+
         }
     }
 
