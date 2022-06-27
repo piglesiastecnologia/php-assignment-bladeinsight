@@ -19,11 +19,11 @@
 <section>
     <h1>My Turbines:</h1>
     <ul>
-        <li><?php echo $product->getTitle(); ?></li>
-        <li><?php echo $product->getDescription(); ?></li>
-        <li><?php echo $product->getPrice(); ?></li>
-        <li><?php echo $product->getSku(); ?></li>
-        <li><?php echo $product->getImage(); ?></li>
+        <li><?php echo $turbine->getId(); ?></li>
+        <li><?php echo $turbine->getSlug(); ?></li>
+        <li><?php echo $turbine->getManufacture(); ?></li>
+        <li><?php echo $turbine->getDimensionPositive(); ?></li>
+        <li><?php echo $turbine->getDimensionNegative(); ?></li>
     </ul>
     <a href="<?php echo $routes->get('homepage')->getPath(); ?>">Back to homepage</a>
     <section>
