@@ -28,7 +28,7 @@ Clone `piglesiastecnologia/php-assignment` repository, use the SSH to connect wi
 git clone git@github.com:<user>/php-assignment.git
 ```
 
-### 2.Composer
+### 2. Composer
 
 Inside the project folder, use the composer to install all dependecies.
 You can install the library via [Composer](https://getcomposer.org/). If you don't already have Composer installed, first install it by following one of these instructions depends on your OS of choice:
@@ -41,15 +41,15 @@ After composer is installed, Then run the following command to install the PHP A
 php composer.phar install
 ```
 
-### 3.Database
+### 3. Database
 
 Inside the directory Database have a sql statements to create the database to work, search for: `00-initial.sql`
 And configure the host access inside:
 - `app/`config.php
 
-### 4.Start the project
+### 4. Start the project
 
 If use the native PHP use this command:
 ```
-php -S localhost:8000
+php -S localhost:8000 -t public/
 ```
