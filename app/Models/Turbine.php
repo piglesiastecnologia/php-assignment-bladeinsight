@@ -13,6 +13,10 @@ class Turbine extends Model
     protected $dimension_positive;
     protected $dimension_negative;
 
+    public function __construct()
+    {
+    }
+
     // GETTERS METHODS
     public function getId()
     {
@@ -39,8 +43,8 @@ class Turbine extends Model
         return $this->dimension_positive;
     }
 
-    // SETTERS METHOD
 
+    // SETTERS METHOD
     public function getDimensionNegative()
     {
         return $this->dimension_negative;
@@ -74,28 +78,78 @@ class Turbine extends Model
 
     }
 
-    public function read(int $id)
+    /**
+     * read
+     * @param int|null $id
+     * @return array|false
+     */
+    public function read(int $id = null)
     {
-        $conn = $this->conn();
-        $sql = "SELECT * FROM turbines WHERE id=".$id;
+        if (empty($id)) {
+            $sql = "SELECT * FROM turbines";
+        } else {
+            $sql = "SELECT * FROM turbines WHERE id=" . $id;
+        }
 
-        // use exec() because no results are returned
+        $conn = $this->conn();
         $result = $conn->query($sql);
 
-        return $result->fetch(PDO::FETCH_ASSOC);
+        return $result->fetchAll(PDO::FETCH_ASSOC);
 
     }
 
+    /**
+     * update
+     * @param int $id
+     * @param array $data
+     * @return bool
+     */
     public function update(int $id, array $data)
     {
+        $sql = "UPDATE turbines 
+                SET manufacture=:manufacture, 
+                    dimension_positive=:dimension_positive, 
+                    dimension_negative=:dimension_positive 
+                WHERE id=:id";
+
+
+        $conn = $this->conn();
+        $statement = $conn->prepare($sql);
+
+        // bind values
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->bindParam(':manufacture', $data['manufacture']);
+        $statement->bindParam(':dimension_positive', $data['dimension_positive']);
+        $statement->bindParam(':dimension_negative', $data['dimension_negative']);
+
+        $statement->execute();
+
+        if ($statement->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
 
+    /**
+     * delete
+     * @param int $id
+     * @return void
+     */
     public function delete(int $id)
     {
+        $sql = "DELETE FROM turbines WHERE id = :id";
+        $conn = $this->conn();
+        $statement = $conn->prepare($sql);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
 
+        if ($statement->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
-
-
 
 }

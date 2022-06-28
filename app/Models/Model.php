@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-class Model
-{
+use PDO;
+
+class Model {
+
     /**
-     * conn DB
-     * @return PDO|void
+     * connection DB
      */
     protected function conn(){
         try {
@@ -19,6 +20,5 @@ class Model
         } catch (PDOException $e) {
             echo "Erro ao conectar com o MySQL: <br>" . $e->getMessage();
         }
-
     }
 }
