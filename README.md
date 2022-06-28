@@ -14,7 +14,7 @@ requested by Bladeinsight.
 
 
 ## Installation
-For running this project, you need to install `php-assignment` library before. It can be done by two different methods:
+For running this project, you need to install `php-assignment` library and the dependencies. It can be done by this methods:
 
 
 ### 1. Clone the repo
