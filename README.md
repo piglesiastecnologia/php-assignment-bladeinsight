@@ -3,6 +3,9 @@
 This project has the purpose of presenting the assignment
 requested by Bladeinsight. 
 
+It consisted in an API that create, read, update and delete the data related at turbines for bladeinsight.
+
+
 ## Requirements
 
 ![](https://img.shields.io/badge/Code-PHP-informational?style=flat&logo=php&logoColor=white&color=purple)
@@ -40,5 +43,13 @@ php composer.phar install
 
 ### 3.Database
 
-Inside the directory Database have a sql statements to create the database to work.
-And configure the host access inside `config.php`.
+Inside the directory Database have a sql statements to create the database to work, search for: `00-initial.sql`
+And configure the host access inside:
+- `app/`config.php
+
+### 4.Start the project
+
+If use the native PHP use this command:
+```
+php -S localhost:8000
+```
