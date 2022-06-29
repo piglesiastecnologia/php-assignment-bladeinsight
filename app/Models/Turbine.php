@@ -85,17 +85,7 @@ class Turbine extends Model
      */
     public function read(int $id = null)
     {
-        if (empty($id)) {
-            $sql = "SELECT * FROM turbines";
-        } else {
-            $sql = "SELECT * FROM turbines WHERE id=" . $id;
-        }
-
-        $conn = $this->conn();
-        $result = $conn->query($sql);
-
-        return $result->fetchAll(PDO::FETCH_ASSOC);
-
+        return $this->base_read("turbines", $id);
     }
 
     /**
@@ -135,21 +125,53 @@ class Turbine extends Model
     /**
      * delete
      * @param int $id
-     * @return void
+     * @return bool
      */
     public function delete(int $id)
     {
-        $sql = "DELETE FROM turbines WHERE id = :id";
-        $conn = $this->conn();
-        $statement = $conn->prepare($sql);
-        $statement->bindParam(':id', $id, PDO::PARAM_INT);
-        $statement->execute();
+        return $this->base_delete("turbines", $id);
+    }
 
-        if ($statement->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
+    public function validate($data, $is_update = false) {
+        // Function settings
+        $invalid = false;
+        $response_validate = [];
+
+        /**
+         * > remove spaces with trim
+         * > htmlspecialchars
+         * > striplashes
+         */
+        $data = $this->basic_data_validation($data);
+
+        // Validation required fields
+        if (empty($data['manufacture'])) {
+            $response_validate[] = "Manufacture field is required.";
+            $invalid = true;
         }
+
+        if (empty($data['dimension_positive'])) {
+            $response_validate[] = "Positive Dimension field is required.";
+            $invalid = true;
+        }
+
+        if (empty($data['dimension_negative'])) {
+            $response_validate[] = "Negative Dimension field is required.";
+            $invalid = true;
+        }
+
+        if ($invalid) {
+            return [
+                "is_valid" => false,
+                "data" => $response_validate
+            ];
+        } else {
+            return [
+                "is_valid" => true,
+                "data" => $data
+            ];
+        }
+
     }
 
 }
