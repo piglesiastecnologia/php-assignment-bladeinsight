@@ -1,5 +1,5 @@
 {
-  "name": "piglesiastecnologia/php-assignment",
+  "name": "piglesiastecnologia/php-assignment-bladeinsight",
   "description": "Bladeinsight assignment to demonstrate php mvc structure",
   "autoload": {
     "psr-4": {
