@@ -2,20 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d1aacfd7-476b-4e94-b958-abe812393656" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/phpunit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/ControllerTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/UsersControllerTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php-assignment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php-assignment.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Controllers/UsersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Turbine.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Turbine.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/00-Initial.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/00-Initial.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/ModelTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/ModelTest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/TurbineControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/TurbineControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/UsersControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/UsersControllerTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

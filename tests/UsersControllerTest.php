@@ -17,7 +17,7 @@ class UsersControllerTest extends TestCase {
 
     public function testLogin() {
 
-        //Realizamos uma requisição do tipo GET na URL informada
+        //Realizamos uma requisição do tipo POST na URL informada
         $response = $this->http->post('localhost:8000/login', [
             // 'headers'=> ['Authorization' => ""],
             'form_params' => [
@@ -33,7 +33,7 @@ class UsersControllerTest extends TestCase {
     }
 
     public function testRegister() {
-        //Realizamos uma requisição do tipo GET na URL informada
+        //Realizamos uma requisição do tipo POST na URL informada
         $response = $this->http->post('localhost:8000/register', [
             // 'headers'=> ['Authorization' => ""],
             'form_params' => [
