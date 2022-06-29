@@ -10,7 +10,7 @@ class Controller {
      * @param int $httpStatus
      * @return void
      */
-    function json_response($data=null, int $httpStatus=200) {
+    function json_response($data=null, int $httpStatus = 200) {
         // remove the previous header (if has...)
         header_remove();
 

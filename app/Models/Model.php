@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use PDO;
+use PDOException;
 
 class Model {
 
@@ -25,7 +26,7 @@ class Model {
     /**
      * basic_data_validation
      * @param array $data
-     * @return string
+     * @return array
      */
     public function basic_data_validation(array $data) {
 
@@ -41,13 +42,12 @@ class Model {
     }
 
     // Basic functions CRUD
-
     /**
      * base_read
      * @param int|null $id
      * @return array|false
      */
-    public function base_read(string $model, int $id)
+    public function base_read(string $model, int $id = null)
     {
         if (empty($id)) {
             $sql = "SELECT * FROM $model";

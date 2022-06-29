@@ -132,6 +132,12 @@ class Turbine extends Model
         return $this->base_delete("turbines", $id);
     }
 
+    /**
+     * validate data from post of create and update
+     * @param $data
+     * @param $is_update
+     * @return array
+     */
     public function validate($data, $is_update = false) {
         // Function settings
         $invalid = false;

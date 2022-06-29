@@ -6,6 +6,45 @@ use App\Models\User;
 
 class UsersController extends Controller
 {
+
+    /**
+     * register
+     * @return void
+     */
+    public function register()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user = new User();
+            $validate = $user->validate($_POST);
+
+            if ($validate['is_valid']) {
+                # Generate a random token *** JWT ***
+                $token = $this->generateRandomString(100);
+                $validate["data"]['token'] = $token;
+
+                $id = $user->create($validate["data"]);
+
+                if (!empty($id)) {
+                    $this->json_response("User created :: Token > ".$token, 201);
+                } else {
+                    $this->json_response("Can't create the record", 400);
+
+                }
+
+            } else {
+                $this->json_response($validate["data"], 400);
+            }
+
+        } else {
+            $this->json_response("Method not allowed", 405);
+
+        }
+    }
+
+    /**
+     * login
+     * @return void
+     */
     public function login()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -16,8 +55,8 @@ class UsersController extends Controller
                 $user_id = $user->check_user($validate["data"]);
 
                 if ($user_id != 0 && !empty($user_id)) {
-//                    session_start();
-//                    $_SESSION['logged'] = true;
+                    //  session_start();
+                    //  $_SESSION['logged'] = true;
                     $token = $this->generateRandomString(100);
                     $user->update_user_token($token, $user_id);
 
@@ -39,37 +78,14 @@ class UsersController extends Controller
         }
     }
 
+
+    /**
+     * logout
+     * @return void
+     */
     public function logout()
     {
         session_destroy();
     }
 
-    public function register()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $user = new User();
-            $validate = $user->validate($_POST);
-
-            if ($validate['is_valid']) {
-                $token = $this->generateRandomString(100);
-                $validate["data"]['token'] = $token;
-
-                $id = $user->create($validate["data"]);
-
-                if (!empty($id)) {
-                    $this->json_response("User created :: Token > ".$token, 302);
-                } else {
-                    $this->json_response("Can't create the record", 400);
-
-                }
-
-            } else {
-                $this->json_response($validate["data"], 400);
-            }
-
-        } else {
-            $this->json_response("Method not allowed", 405);
-
-        }
-    }
 }
