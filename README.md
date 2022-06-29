@@ -53,3 +53,16 @@ If use the native PHP use this command:
 ```
 php -S localhost:8000 -t public/
 ```
+
+### 5. Tests
+
+This project have the PHPUnit test framework available to test the application.
+Take a look at the folder `tests` and you will see:
+
+- `app/`UsersControllerTest.php
+- `app/`TurbineControllerTest.php
+
+Inside each file, has some tests to perform and see the application running
+
+
+Thank you for the interest.
